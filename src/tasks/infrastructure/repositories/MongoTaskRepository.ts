@@ -14,4 +14,14 @@ export class MongoTaskRepository implements TaskRepository {
 
     return tasks;
   }
+
+  async delete(id: string): Promise<Task> {
+    const _id = id;
+    const task = await TaskModel.findOneAndDelete({ _id });
+    if (!task) {
+      throw new Error("Not task found");
+    }
+
+    return task;
+  }
 }
