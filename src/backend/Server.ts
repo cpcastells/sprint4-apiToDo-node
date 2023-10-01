@@ -1,6 +1,7 @@
 import cors from "cors";
 import express from "express";
 import helmet from "helmet";
+import { taskRouter } from "../tasks/infrastructure/http/taskRouter.js";
 
 export class Server {
   private readonly express: express.Express;
@@ -10,6 +11,7 @@ export class Server {
     this.express.use(helmet());
     this.express.use(cors());
     this.express.use(express.json());
+    this.express.use("/tasks", taskRouter);
   }
 
   async listen(): Promise<void> {
