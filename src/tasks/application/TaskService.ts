@@ -1,7 +1,7 @@
 import type Task from "../domain/entities/Task.js";
 import { type TaskRepository } from "../domain/repositories/TaskRepository.js";
 
-export class TaskService {
+class TaskService {
   constructor(private readonly taskRepository: TaskRepository) {}
 
   async create(task: Task): Promise<Task> {
@@ -10,3 +10,5 @@ export class TaskService {
     return createdTask;
   }
 }
+
+export default TaskService;
