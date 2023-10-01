@@ -8,7 +8,9 @@
     "build": "rimraf dist & tsc",
     "build:dev": "tsc --watch",
     "start": "node dist",
-    "start:dev": "node --watch dist"
+    "start:dev": "node --watch dist",
+    "lint": "eslint --ext .ts ./src",
+    "lint:fix": "eslint --fix --ext .ts ./src"
   },
   "keywords": [],
   "author": "",
