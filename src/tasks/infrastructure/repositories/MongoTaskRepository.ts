@@ -1,3 +1,4 @@
+import { Types } from "mongoose";
 import type Task from "../../domain/entities/Task.js";
 import { type TaskRepository } from "../../domain/repositories/TaskRepository.js";
 import { TaskModel } from "../models/taskSchema.js";
@@ -23,5 +24,20 @@ export class MongoTaskRepository implements TaskRepository {
     }
 
     return task;
+  }
+
+  async update(id: string, task: Task): Promise<Task> {
+    const _id = id;
+    const updatedTask = await TaskModel.findByIdAndUpdate(
+      { _id },
+      { ...task, _id: new Types.ObjectId(id) },
+      { new: true }
+    );
+
+    if (!updatedTask) {
+      throw new Error("Not task found");
+    }
+
+    return updatedTask;
   }
 }
