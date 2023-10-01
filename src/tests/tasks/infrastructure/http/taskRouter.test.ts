@@ -6,7 +6,7 @@ import request from "supertest";
 import connectToDatabase from "../../../../tasks/infrastructure/connectToDataBase.js";
 import { Server } from "../../../../backend/Server.js";
 import { TaskModel } from "../../../../tasks/infrastructure/models/taskSchema.js";
-import { mockedTask } from "../../../mocks/mocks.js";
+import { mockedTask, mockedTaskWithId } from "../../../mocks/mocks.js";
 
 dotenv.config();
 
@@ -66,6 +66,26 @@ describe("Given a GET /tasks endpoint", () => {
         .expect(expectedStatus);
 
       expect(response.body.tasks).toHaveLength(1);
+    });
+  });
+});
+
+describe("Given a DELETE /tasks/:id endpoint", () => {
+  beforeEach(async () => {
+    await TaskModel.create(mockedTaskWithId);
+  });
+
+  describe("When it receives a request with an authorization header containing a valid user and password and id as params,", () => {
+    test("Then it should return a 200 status and a the deleted task", async () => {
+      const expectedStatus = 200;
+      const authString = Buffer.from(`${user}:${key}`).toString("base64");
+
+      const response = await request(app)
+        .delete(`/tasks/${mockedTaskWithId._id.toString()}`)
+        .set("Authorization", `Basic ${authString}`)
+        .expect(expectedStatus);
+
+      expect(response.body).toHaveProperty("Object deleted");
     });
   });
 });
