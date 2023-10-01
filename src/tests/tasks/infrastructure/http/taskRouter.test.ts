@@ -49,3 +49,23 @@ describe("Given a POST /tasks endpoint", () => {
     });
   });
 });
+
+describe("Given a GET /tasks endpoint", () => {
+  beforeEach(async () => {
+    await TaskModel.create(mockedTask);
+  });
+
+  describe("When it receives a request with an authorization header containing a valid user and password,", () => {
+    test("Then it should return a 200 status and a collection of tasks", async () => {
+      const expectedStatus = 200;
+      const authString = Buffer.from(`${user}:${key}`).toString("base64");
+
+      const response = await request(app)
+        .get("/tasks")
+        .set("Authorization", `Basic ${authString}`)
+        .expect(expectedStatus);
+
+      expect(response.body.tasks).toHaveLength(1);
+    });
+  });
+});
