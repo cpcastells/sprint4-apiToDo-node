@@ -8,4 +8,10 @@ export class MongoTaskRepository implements TaskRepository {
 
     return createdTask;
   }
+
+  async get(): Promise<Task[]> {
+    const tasks = await TaskModel.find();
+
+    return tasks;
+  }
 }
