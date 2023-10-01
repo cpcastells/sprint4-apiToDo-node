@@ -21,9 +21,7 @@ export class Server {
     await new Promise<void>((resolve) => {
       this.express.listen(this.port, () => {
         console.log(
-          `✅ Backend App is running at http://localhost:${
-            this.port
-          } in ${this.express.get("env")} mode`
+          `✅ Backend App is running at http://localhost:${this.port}`
         );
 
         console.log("✋ Press CTRL-C to stop\n");
