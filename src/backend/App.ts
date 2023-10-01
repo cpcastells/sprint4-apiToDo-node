@@ -1,3 +1,4 @@
+import "./loadEnvironment.js";
 import { Server } from "./Server.js";
 
 export class App {
