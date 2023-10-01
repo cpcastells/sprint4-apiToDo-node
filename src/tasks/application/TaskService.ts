@@ -9,6 +9,12 @@ class TaskService {
 
     return createdTask;
   }
+
+  async get(): Promise<Task[]> {
+    const tasks = await this.taskRepository.get();
+
+    return tasks;
+  }
 }
 
 export default TaskService;
