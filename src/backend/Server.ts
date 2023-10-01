@@ -1,4 +1,3 @@
-import { json } from "body-parser";
 import cors from "cors";
 import express from "express";
 import helmet from "helmet";
@@ -10,7 +9,7 @@ export class Server {
     this.express = express();
     this.express.use(helmet());
     this.express.use(cors());
-    this.express.use(json());
+    this.express.use(express.json());
   }
 
   async listen(): Promise<void> {
