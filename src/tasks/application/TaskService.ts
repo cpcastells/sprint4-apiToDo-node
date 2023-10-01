@@ -21,6 +21,12 @@ class TaskService {
 
     return task;
   }
+
+  async update(id: string, task: Task): Promise<Task> {
+    const updatedTask = await this.taskRepository.update(id, task);
+
+    return updatedTask;
+  }
 }
 
 export default TaskService;
