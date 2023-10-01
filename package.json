@@ -7,8 +7,8 @@
   "scripts": {
     "build": "rimraf dist & tsc",
     "build:dev": "tsc --watch",
-    "start": "node dist",
-    "start:dev": "node --watch dist",
+    "start": "node dist/backend",
+    "start:dev": "node --watch dist/backend",
     "lint": "eslint --ext .ts ./src",
     "lint:fix": "eslint --fix --ext .ts ./src"
   },
