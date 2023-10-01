@@ -15,6 +15,12 @@ class TaskService {
 
     return tasks;
   }
+
+  async delete(id: string): Promise<Task> {
+    const task = await this.taskRepository.delete(id);
+
+    return task;
+  }
 }
 
 export default TaskService;
