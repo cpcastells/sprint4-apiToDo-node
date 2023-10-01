@@ -2,6 +2,7 @@ import cors from "cors";
 import express from "express";
 import helmet from "helmet";
 import { taskRouter } from "../tasks/infrastructure/http/taskRouter.js";
+import noCacheMiddleware from "./middlewares/noCacheMiddleware.js";
 
 export class Server {
   private readonly express: express.Express;
@@ -11,6 +12,7 @@ export class Server {
     this.express.use(helmet());
     this.express.use(cors());
     this.express.use(express.json());
+    this.express.use(noCacheMiddleware);
     this.express.use("/tasks", taskRouter);
   }
 
